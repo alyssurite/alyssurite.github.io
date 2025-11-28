@@ -4,10 +4,22 @@
         <script src="./aframe.min.js"></script>
         <script src="./aframe-ar.js"></script>
         <script>
-            AFRAME.registerComponent("show-clips", {
+            AFRAME.registerComponent("debug-mixer", {
                 init: function () {
                     this.el.addEventListener("model-loaded", (e) => {
-                        console.log("GLTF Clips:", e.detail.model.animations);
+                        const model = e.detail.model;
+                        console.log("Model Loaded:", model);
+
+                        this.mixer = this.el.components["animation-mixer"].mixer;
+                        console.log("Mixer:", this.mixer);
+
+                        const clips = model.animations;
+                        console.log("Clips:", clips);
+
+                        // Start the first clip manually
+                        const action = this.mixer.clipAction(clips[0], model);
+                        action.reset().play();
+                        console.log("Action Started:", action);
                     });
                 },
             });
@@ -21,11 +33,11 @@
         >
             <a-marker preset="hiro">
                 <a-entity
-                    animation-mixer="clip: Animation; loop: repeat; crossFadeDuration: 0"
+                    animation-mixer="clip: 0"
                     position="0 0 0"
                     scale="0.2 0.2 0.2"
                     gltf-model="url(model.glb)"
-                    show-clips
+                    debug-mixer
                 ></a-entity>
             </a-marker>
             <a-entity camera></a-entity>
