@@ -3,6 +3,15 @@
     <head>
         <script src="./aframe.min.js"></script>
         <script src="./aframe-ar.js"></script>
+        <script>
+            AFRAME.registerComponent("show-clips", {
+                init: function () {
+                    this.el.addEventListener("model-loaded", (e) => {
+                        console.log("GLTF Clips:", e.detail.model.animations);
+                    });
+                },
+            });
+        </script>
     </head>
     <body style="margin: 0px; overflow: hidden">
         <a-scene
@@ -16,6 +25,7 @@
                     position="0 0 0"
                     scale="0.2 0.2 0.2"
                     gltf-model="url(model.glb)"
+                    show-clips
                 ></a-entity>
             </a-marker>
             <a-entity camera></a-entity>
