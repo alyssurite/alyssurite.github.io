@@ -5,9 +5,18 @@
     </head>
     <script src="/aframe-ar.js"></script>
     <body style="margin: 0px; overflow: hidden">
-        <a-scene embedded arjs>
+        <a-scene
+            vr-mode-ui="enabled: false"
+            embedded
+            arjs="trackingMethod: best; sourceType: webcam;"
+        >
             <a-marker preset="hiro">
-                <a-entity position="0 0 0" scale="0.05 0.05 0.05" gltf-model="model.glb"></a-entity>
+                <a-entity
+                    animation-mixer
+                    position="0 0 0"
+                    scale="0.2 0.2 0.2"
+                    gltf-model="model.glb"
+                ></a-entity>
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
