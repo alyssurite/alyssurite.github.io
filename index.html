@@ -2,8 +2,8 @@
 <html>
     <head>
         <script src="./aframe.min.js"></script>
+        <script src="./aframe-ar.js"></script>
     </head>
-    <script src="/aframe-ar.js"></script>
     <body style="margin: 0px; overflow: hidden">
         <a-scene
             vr-mode-ui="enabled: false"
@@ -12,10 +12,10 @@
         >
             <a-marker preset="hiro">
                 <a-entity
-                    animation-mixer
+                    animation-mixer="clip: *"
                     position="0 0 0"
                     scale="0.2 0.2 0.2"
-                    gltf-model="model.glb"
+                    gltf-model="url(model.glb)"
                 ></a-entity>
             </a-marker>
             <a-entity camera></a-entity>
