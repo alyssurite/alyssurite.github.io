@@ -3,37 +3,6 @@
     <head>
         <script src="./aframe.min.js"></script>
         <script src="./aframe-ar.js"></script>
-        <script>
-            AFRAME.registerComponent("debug-mixer", {
-                init: function () {
-                    this.el.addEventListener("model-loaded", (e) => {
-                        const model = e.detail.model;
-                        console.log("Model Loaded:", model);
-
-                        this.mixer = this.el.components["animation-mixer"].mixer;
-                        console.log("Mixer:", this.mixer);
-
-                        const clips = model.animations;
-                        console.log("Clips:", clips);
-
-                        // Start the first clip manually
-                        const action = this.mixer.clipAction(clips[0], model);
-                        action.reset().play();
-                        console.log("Action Started:", action);
-                    });
-                },
-            });
-        </script>
-        <script>
-            AFRAME.registerComponent("print-tree", {
-                init() {
-                    this.el.addEventListener("model-loaded", (e) => {
-                        console.log("Model Tree:");
-                        e.detail.model.traverse((n) => console.log(n.name, n.type));
-                    });
-                },
-            });
-        </script>
     </head>
     <body style="margin: 0px; overflow: hidden">
         <a-scene
@@ -43,12 +12,10 @@
         >
             <a-marker preset="hiro">
                 <a-entity
-                    animation-mixer="clip: 0"
+                    animation-mixer
                     position="0 0 0"
                     scale="0.2 0.2 0.2"
                     gltf-model="url(model.glb)"
-                    debug-mixer
-                    print-tree
                 ></a-entity>
             </a-marker>
             <a-entity camera></a-entity>
